@@ -98,27 +98,27 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 animate-fade-in-up">
+          <div className="lg:hidden py-6 px-4 bg-background/98 backdrop-blur-lg shadow-xl rounded-lg mx-4 my-2 animate-fade-in-up border border-border">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-foreground hover:text-primary transition-colors font-medium py-2"
+                  className="text-left text-foreground hover:text-primary hover:bg-secondary/50 transition-all font-medium py-3 px-4 rounded-lg"
                 >
                   {item.label}
                 </button>
               ))}
               <a
                 href="tel:+380441234567"
-                className="flex items-center text-foreground hover:text-primary transition-colors py-2"
+                className="flex items-center text-foreground hover:text-primary hover:bg-secondary/50 transition-all py-3 px-4 rounded-lg"
               >
                 <Phone className="w-5 h-5 mr-2" />
                 <span className="font-semibold">044 123 45 67</span>
               </a>
               <Button
                 onClick={() => scrollToSection("contacts")}
-                className="bg-primary hover:bg-primary/90 w-full"
+                className="bg-primary hover:bg-primary/90 w-full mt-2"
               >
                 Записатись на прийом
               </Button>
