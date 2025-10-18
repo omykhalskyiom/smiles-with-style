@@ -66,11 +66,11 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch">
           {services.map((service, index) => (
             <Card
               key={index}
-              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 relative group ${
+              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 relative group flex flex-col w-full max-w-sm md:max-w-none ${
                 service.popular ? "ring-2 ring-primary" : ""
               }`}
             >
@@ -81,7 +81,7 @@ const Pricing = () => {
                   </span>
                 </div>
               )}
-              <CardContent className="p-6 lg:p-8 pt-8">
+              <CardContent className="p-6 lg:p-8 pt-8 flex-grow">
                 <h3 className="text-2xl font-bold text-foreground mb-2">
                   {service.title}
                 </h3>
@@ -100,7 +100,7 @@ const Pricing = () => {
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter className="p-6 pt-0">
+              <CardFooter className="p-6 pt-0 mt-auto">
                 <Button
                   className="w-full bg-primary hover:bg-primary/90"
                   onClick={scrollToContacts}

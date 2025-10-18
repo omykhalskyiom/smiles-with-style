@@ -54,17 +54,18 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full max-w-5xl mx-auto"
-        >
-          <CarouselContent>
+        <div className="w-full max-w-5xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full relative"
+          >
+          <CarouselContent className="flex items-center">
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <Card className="border-0 shadow-card hover:shadow-card-hover transition-all duration-300 h-full">
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 flex justify-center">
+                <Card className="border-0 shadow-card hover:shadow-card-hover transition-all duration-300 h-full w-full max-w-sm md:max-w-none">
                   <CardContent className="p-6 lg:p-8">
                     <div className="flex items-center mb-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
@@ -94,9 +95,10 @@ const Testimonials = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
+            <CarouselPrevious className="flex" />
+            <CarouselNext className="flex" />
+          </Carousel>
+        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 lg:mt-16 max-w-3xl mx-auto">
