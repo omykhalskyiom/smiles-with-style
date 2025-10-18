@@ -70,7 +70,7 @@ const Pricing = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 relative ${
+              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 relative group ${
                 service.popular ? "ring-2 ring-primary" : ""
               }`}
             >
@@ -94,7 +94,7 @@ const Pricing = () => {
                 <ul className="space-y-3">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
-                      <Check className="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
+                      <Check className="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300" />
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
