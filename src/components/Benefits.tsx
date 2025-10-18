@@ -1,27 +1,37 @@
-import { Stethoscope, Sparkles, HeartPulse, Calendar } from "lucide-react";
+import { Stethoscope, Sparkles, HeartPulse, Calendar, Shield, Users, Award, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Benefits = () => {
   const benefits = [
     {
-      icon: Stethoscope,
-      title: "Досвідчені лікарі",
-      description: "Команда кваліфікованих стоматологів з багаторічним досвідом та постійним підвищенням кваліфікації",
+      icon: Sparkles,
+      title: "Сучасна матеріально-технічна база",
+      description: "Обладнання найбільших світових виробників (KAVO, Planmeca, Zeiss), цифрова радіографія та 3D-томографія",
     },
     {
-      icon: Sparkles,
-      title: "Сучасне обладнання",
-      description: "Новітні технології та устаткування європейського рівня для точної діагностики та лікування",
+      icon: Stethoscope,
+      title: "Висококваліфікований персонал",
+      description: "Лікарі зі спеціалізацією та сертифікатами міжнародного рівня, досвід роботи від 7+ років",
     },
     {
       icon: HeartPulse,
-      title: "Безболісне лікування",
-      description: "Використання сучасних методів анестезії для максимально комфортного та безболісного лікування",
+      title: "Комфортне середовище",
+      description: "Затишні кабінети з європейським ремонтом, система кондиціювання повітря, дружелюбний персонал",
     },
     {
-      icon: Calendar,
-      title: "Зручний онлайн-запис",
-      description: "Записуйтесь на прийом в зручний для вас час онлайн або за телефоном без черг та очікування",
+      icon: Shield,
+      title: "Безпечність та якість",
+      description: "Біопаліліфікація 100% інструментів, використання тільки ліцензійних матеріалів, гарантія на послуги",
+    },
+    {
+      icon: Users,
+      title: "Індивідуальний підхід",
+      description: "Детальна консультація перед кожною процедурою, план лікування з врахуванням побажань пацієнта",
+    },
+    {
+      icon: MapPin,
+      title: "Зручність та доступність",
+      description: "Зручне розташування у центрі міста, паркування біля клініки, запис на прийом онлайн чи по телефону",
     },
   ];
 
@@ -37,7 +47,7 @@ const Benefits = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (

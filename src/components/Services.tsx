@@ -1,27 +1,49 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Smile, Sparkles, Shield, Pill } from "lucide-react";
+import { Smile, Sparkles, Shield, Pill, Heart, Baby, Wrench, Crown } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      icon: Smile,
-      title: "Терапевтична стоматологія",
-      description: "Лікування карієсу, пульпіту, періодонтиту. Якісні пломби з гарантією.",
-    },
-    {
-      icon: Sparkles,
-      title: "Естетична стоматологія",
-      description: "Відбілювання зубів, вініри, реставрація. Голлівудська усмішка без болю.",
-    },
-    {
       icon: Shield,
-      title: "Професійна гігієна",
-      description: "Ультразвукова чистка, Air Flow, полірування та фторування емалі.",
+      title: "Профілактика та гігієна",
+      description: "Професійна чистка зубів, фторування, герметизація фісур, індивідуальна гігієнічна консультація.",
+      price: "400-600 грн",
+      duration: "45-60 хв"
+    },
+    {
+      icon: Smile,
+      title: "Терапевтичне лікування",
+      description: "Лікування карієсу, пульпіту, періодонтиту, відбілювання зубів. Якісні пломби з гарантією.",
+      price: "250-2000 грн",
+      duration: "30-90 хв"
+    },
+    {
+      icon: Crown,
+      title: "Ортопедія та протезування",
+      description: "Коронки, мости, імплантація, знімні протези, вініри. Сучасні матеріали та методи.",
+      price: "2000-7000 грн",
+      duration: "2-6 місяців"
+    },
+    {
+      icon: Wrench,
+      title: "Ортодонтія",
+      description: "Брекет-системи, елайнери, пластинки для дітей. Виправлення прикусу та вирівнювання зубів.",
+      price: "2000-25000 грн",
+      duration: "6-24 місяці"
     },
     {
       icon: Pill,
       title: "Хірургічна стоматологія",
-      description: "Видалення зубів, імплантація, операції на яснах. Сучасні методи.",
+      description: "Видалення зубів, синус-ліфтинг, пластика м'яких тканин. Безболісні операції.",
+      price: "500-3000 грн",
+      duration: "30-60 хв"
+    },
+    {
+      icon: Baby,
+      title: "Дитяча стоматологія",
+      description: "Лікування молочних зубів, герметизація, профілактика. Безболісне лікування в ігровій формі.",
+      price: "150-500 грн",
+      duration: "20-45 хв"
     },
   ];
 
@@ -37,7 +59,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -45,14 +67,26 @@ const Services = () => {
                 key={index}
                 className="border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 bg-card group"
               >
-                <CardContent className="p-6 lg:p-8 text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                    <Icon className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors" />
+                <CardContent className="p-6 lg:p-8">
+                  <div className="flex items-start mb-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                      <Icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                        {service.title}
+                      </h3>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                        <span className="bg-primary/10 text-primary px-2 py-1 rounded-md font-medium">
+                          {service.price}
+                        </span>
+                        <span className="text-muted-foreground">
+                          {service.duration}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     {service.description}
                   </p>
                 </CardContent>
