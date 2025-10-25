@@ -25,7 +25,6 @@ const Header = () => {
   const navItems = [
     { label: "Послуги", id: "services" },
     { label: "Про нас", id: "about" },
-    { label: "Ортодонтія", id: "orthodontics" },
     { label: "Відгуки", id: "testimonials" },
     { label: "Ціни", id: "pricing" },
     { label: "Контакти", id: "contacts" },
