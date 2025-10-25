@@ -8,24 +8,20 @@ import Pricing from "@/components/Pricing";
 import Contacts from "@/components/Contacts";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       <main>
         <Hero />
         <Services />
         <Benefits />
-        <Orthodontics />
+        
         <Testimonials />
         <Pricing />
         <Contacts />
       </main>
       <Footer />
       <ScrollToTop />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
