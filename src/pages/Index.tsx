@@ -8,6 +8,7 @@ import Pricing from "@/components/Pricing";
 import Contacts from "@/components/Contacts";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ChatWidget from "@/components/ChatWidget";
 const Index = () => {
   return <div className="min-h-screen bg-background">
       <Header />
@@ -22,6 +23,7 @@ const Index = () => {
       </main>
       <Footer />
       <ScrollToTop />
+      <ChatWidget />
     </div>;
 };
 export default Index;
