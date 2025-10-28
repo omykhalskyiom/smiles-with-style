@@ -18,7 +18,7 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -31,16 +31,37 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
       return;
     }
 
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData);
-    
-    toast({
-      title: "Дякуємо!",
-      description: "Наш адміністратор скоро зв'яжеться з вами 💙",
-    });
+    try {
+      // Send data to webhook
+      await fetch("https://mykhalskyi.app.n8n.cloud/webhook-test/37fafa4e-ff82-40d4-945b-1b80ff7ed328", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          message: formData.message,
+          timestamp: new Date().toISOString(),
+        }),
+      });
 
-    // Reset form
-    setFormData({ name: "", phone: "", message: "" });
+      toast({
+        title: "Дякуємо!",
+        description: "Наш адміністратор скоро зв'яжеться з вами 💙",
+      });
+
+      // Reset form
+      setFormData({ name: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error sending form:", error);
+      toast({
+        title: "Помилка",
+        description: "Не вдалося відправити заявку. Спробуйте ще раз.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleChange = (
