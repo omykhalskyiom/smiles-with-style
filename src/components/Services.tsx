@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { Smile, Sparkles, Shield, Pill, Heart, Baby, Wrench, Crown, Check } from "lucide-react";
 import { useState } from "react";
 
@@ -155,7 +156,7 @@ const Services = () => {
         </div>
 
         <Dialog open={selectedService !== null} onOpenChange={(open) => !open && setSelectedService(null)}>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
             {selectedService !== null && (
               <>
                 <DialogHeader>
@@ -187,13 +188,26 @@ const Services = () => {
                   <h4 className="text-lg font-semibold text-foreground mb-4">Що входить у послугу:</h4>
                   <ul className="space-y-3">
                     {services[selectedService].details.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
+                      <li key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent/50 transition-colors">
                         <div className="w-5 h-5 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Check className="w-3 h-3 text-primary" />
                         </div>
-                        <div className="flex-1 flex items-start justify-between gap-4">
-                          <span className="text-muted-foreground leading-relaxed">{detail.name}</span>
-                          <span className="text-primary font-medium text-sm whitespace-nowrap">{detail.price}</span>
+                        <div className="flex-1 flex items-center justify-between gap-4">
+                          <div className="flex-1">
+                            <span className="text-muted-foreground leading-relaxed">{detail.name}</span>
+                            <span className="text-primary font-medium text-sm ml-4 whitespace-nowrap">{detail.price}</span>
+                          </div>
+                          <Button 
+                            size="sm" 
+                            variant="default"
+                            className="whitespace-nowrap"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              // Додати логіку запису
+                            }}
+                          >
+                            Записатись
+                          </Button>
                         </div>
                       </li>
                     ))}
