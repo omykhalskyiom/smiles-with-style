@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,7 +6,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const Contacts = () => {
+export interface ContactsRef {
+  setMessage: (message: string) => void;
+}
+
+const Contacts = forwardRef<ContactsRef>((props, ref) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -47,6 +51,12 @@ const Contacts = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useImperativeHandle(ref, () => ({
+    setMessage: (message: string) => {
+      setFormData(prev => ({ ...prev, message }));
+    }
+  }));
 
   const contactInfo = [
     {
@@ -213,6 +223,8 @@ const Contacts = () => {
       </div>
     </section>
   );
-};
+});
+
+Contacts.displayName = "Contacts";
 
 export default Contacts;

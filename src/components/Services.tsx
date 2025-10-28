@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Smile, Sparkles, Shield, Pill, Heart, Baby, Wrench, Crown, Check } from "lucide-react";
 import { useState } from "react";
 
-const Services = () => {
+interface ServicesProps {
+  onBookAppointment?: (serviceName: string) => void;
+}
+
+const Services = ({ onBookAppointment }: ServicesProps) => {
   const [selectedService, setSelectedService] = useState<number | null>(null);
 
   const services = [
@@ -203,7 +207,8 @@ const Services = () => {
                             className="whitespace-nowrap"
                             onClick={(e) => {
                               e.stopPropagation();
-                              // Додати логіку запису
+                              setSelectedService(null);
+                              onBookAppointment?.(detail.name);
                             }}
                           >
                             Записатись
