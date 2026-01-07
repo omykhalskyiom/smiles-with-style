@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { CONTACT_INFO } from "@/constants";
 
 export interface ContactsRef {
   setMessage: (message: string) => void;
@@ -12,6 +13,7 @@ export interface ContactsRef {
 
 const Contacts = forwardRef<ContactsRef>((props, ref) => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -20,7 +22,7 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.phone) {
       toast({
@@ -31,9 +33,11 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       // Send data to webhook
-      await fetch("https://mykhalskyi.app.n8n.cloud/webhook-test/37fafa4e-ff82-40d4-945b-1b80ff7ed328", {
+      await fetch(import.meta.env.VITE_WEBHOOK_URL || "https://mykhalskyi.app.n8n.cloud/webhook-test/37fafa4e-ff82-40d4-945b-1b80ff7ed328", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,6 +65,8 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
         description: "Не вдалося відправити заявку. Спробуйте ще раз.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,26 +87,30 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
 
   const contactInfo = [
     {
+      id: "address",
       icon: MapPin,
       title: "Адреса",
-      content: "вул. Хрещатик, 25, Київ, 01001",
+      content: CONTACT_INFO.address,
     },
     {
+      id: "phone",
       icon: Phone,
       title: "Телефон",
-      content: "044 123 45 67",
-      link: "tel:+380441234567",
+      content: CONTACT_INFO.phone,
+      link: CONTACT_INFO.phoneLink,
     },
     {
+      id: "email",
       icon: Mail,
       title: "Email",
-      content: "info@dentsmile.com.ua",
-      link: "mailto:info@dentsmile.com.ua",
+      content: CONTACT_INFO.email,
+      link: CONTACT_INFO.emailLink,
     },
     {
+      id: "schedule",
       icon: Clock,
       title: "Графік роботи",
-      content: "Пн-Пт: 9:00-20:00, Сб: 10:00-18:00, Нд: Вихідний",
+      content: CONTACT_INFO.schedule.full,
     },
   ];
 
@@ -136,6 +146,7 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    disabled={isLoading}
                     className="w-full"
                   />
                 </div>
@@ -155,6 +166,7 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
+                    disabled={isLoading}
                     className="w-full"
                   />
                 </div>
@@ -173,15 +185,17 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
+                    disabled={isLoading}
                     className="w-full resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
+                  disabled={isLoading}
                   className="w-full bg-primary hover:bg-primary/90 text-lg py-6"
                 >
-                  Відправити заявку
+                  {isLoading ? "Відправка..." : "Відправити заявку"}
                 </Button>
               </form>
             </CardContent>
@@ -190,7 +204,7 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
           {/* Contact Info & Map */}
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {contactInfo.map((item, index) => {
+              {contactInfo.map((item) => {
                 const Icon = item.icon;
                 const content = item.link ? (
                   <a
@@ -205,7 +219,7 @@ const Contacts = forwardRef<ContactsRef>((props, ref) => {
 
                 return (
                   <Card
-                    key={index}
+                    key={item.id}
                     className="border-0 shadow-card hover:shadow-card-hover transition-all duration-300"
                   >
                     <CardContent className="p-4 lg:p-6">

@@ -1,14 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
 import heroImage from "@/assets/hero-dental.jpg";
+import { CLINIC_STATS } from "@/constants";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 
 const Hero = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const scrollToSection = useScrollToSection();
 
   return (
     <section
@@ -33,7 +30,7 @@ const Hero = () => {
               Ваша усмішка — наша турбота
             </h1>
           </div>
-          
+
           <div className="animate-fade-in-up" style={{ animationDelay: "0.2s", opacity: 0, animationFillMode: "forwards" }}>
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 max-w-2xl">
               Сучасна стоматологія у центрі міста. Без болю, з комфортом і турботою.
@@ -62,18 +59,12 @@ const Hero = () => {
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 sm:gap-8 mt-12 sm:mt-16 animate-fade-in-up" style={{ animationDelay: "0.6s", opacity: 0, animationFillMode: "forwards" }}>
-            <div>
-              <div className="text-3xl sm:text-4xl font-bold text-primary mb-1">5000+</div>
-              <div className="text-sm sm:text-base text-muted-foreground">Задоволених пацієнтів</div>
-            </div>
-            <div>
-              <div className="text-3xl sm:text-4xl font-bold text-primary mb-1">10</div>
-              <div className="text-sm sm:text-base text-muted-foreground">Років досвіду</div>
-            </div>
-            <div>
-              <div className="text-3xl sm:text-4xl font-bold text-primary mb-1">98%</div>
-              <div className="text-sm sm:text-base text-muted-foreground">Позитивних відгуків</div>
-            </div>
+            {CLINIC_STATS.map((stat) => (
+              <div key={stat.label}>
+                <div className="text-3xl sm:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                <div className="text-sm sm:text-base text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

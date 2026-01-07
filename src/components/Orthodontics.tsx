@@ -91,9 +91,8 @@ const Orthodontics = () => {
           {orthodonticServices.map((service, index) => (
             <Card
               key={index}
-              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 ${
-                service.popular ? "ring-2 ring-primary" : ""
-              }`}
+              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 ${service.popular ? "ring-2 ring-primary" : ""
+                }`}
             >
               {service.popular && (
                 <div className="absolute -top-3 left-4">
@@ -114,7 +113,7 @@ const Orthodontics = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 text-sm">
                   <div className="flex items-center gap-1 text-muted-foreground">
                     <Clock className="w-4 h-4" />
@@ -206,8 +205,8 @@ const Orthodontics = () => {
                 )}
 
                 {service.recommendation && (
-                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
-                    <p className="text-sm text-blue-800">
+                  <div className="p-3 bg-primary/10 border border-primary/20 rounded-md">
+                    <p className="text-sm text-foreground">
                       <strong>Рекомендація:</strong> {service.recommendation}
                     </p>
                   </div>

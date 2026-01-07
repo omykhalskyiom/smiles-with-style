@@ -1,14 +1,10 @@
 import { Facebook, Instagram, Youtube } from "lucide-react";
+import { NAV_ITEMS, CONTACT_INFO } from "@/constants";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const scrollToSection = useScrollToSection();
 
   return (
     <footer className="bg-foreground/5 border-t border-border">
@@ -33,12 +29,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Навігація</h3>
             <ul className="space-y-2">
-              {[
-                { label: "Послуги", id: "services" },
-                { label: "Про нас", id: "about" },
-                { label: "Відгуки", id: "testimonials" },
-                { label: "Ціни", id: "pricing" },
-              ].map((item) => (
+              {NAV_ITEMS.slice(0, 4).map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
@@ -55,22 +46,22 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Контакти</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>вул. Хрещатик, 25</li>
-              <li>Київ, 01001</li>
+              <li>{CONTACT_INFO.addressShort.street}</li>
+              <li>{CONTACT_INFO.addressShort.city}</li>
               <li>
                 <a
-                  href="tel:+380441234567"
+                  href={CONTACT_INFO.phoneLink}
                   className="hover:text-primary transition-colors"
                 >
-                  044 123 45 67
+                  {CONTACT_INFO.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@dentsmile.com.ua"
+                  href={CONTACT_INFO.emailLink}
                   className="hover:text-primary transition-colors"
                 >
-                  info@dentsmile.com.ua
+                  {CONTACT_INFO.email}
                 </a>
               </li>
             </ul>
@@ -86,7 +77,7 @@ const Footer = () => {
             </ul>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                href={CONTACT_INFO.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -94,7 +85,7 @@ const Footer = () => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href={CONTACT_INFO.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -102,7 +93,7 @@ const Footer = () => {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://youtube.com"
+                href={CONTACT_INFO.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"

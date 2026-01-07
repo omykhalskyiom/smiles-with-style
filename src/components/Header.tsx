@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
+import { NAV_ITEMS, CONTACT_INFO } from "@/constants";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const scrollToSection = useScrollToSection();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,36 +17,23 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }
+  const handleNavClick = (id: string) => {
+    scrollToSection(id, () => setIsMobileMenuOpen(false));
   };
-
-  const navItems = [
-    { label: "Послуги", id: "services" },
-    { label: "Про нас", id: "about" },
-    { label: "Відгуки", id: "testimonials" },
-    { label: "Ціни", id: "pricing" },
-    { label: "Контакти", id: "contacts" },
-  ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-md"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div
             className="flex items-center cursor-pointer"
-            onClick={() => scrollToSection("hero")}
+            onClick={() => handleNavClick("hero")}
           >
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-2">
               <span className="text-2xl">🦷</span>
@@ -55,10 +45,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item.id)}
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 {item.label}
@@ -69,14 +59,14 @@ const Header = () => {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-4">
             <a
-              href="tel:+380441234567"
+              href={CONTACT_INFO.phoneLink}
               className="flex items-center text-foreground hover:text-primary transition-colors"
             >
               <Phone className="w-5 h-5 mr-2" />
-              <span className="font-semibold">044 123 45 67</span>
+              <span className="font-semibold">{CONTACT_INFO.phone}</span>
             </a>
             <Button
-              onClick={() => scrollToSection("contacts")}
+              onClick={() => handleNavClick("contacts")}
               className="bg-primary hover:bg-primary/90"
             >
               Записатись на прийом
@@ -100,24 +90,24 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden py-6 px-4 bg-background/98 backdrop-blur-lg shadow-xl rounded-lg mx-4 my-2 animate-fade-in-up border border-border">
             <nav className="flex flex-col space-y-4">
-              {navItems.map((item) => (
+              {NAV_ITEMS.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavClick(item.id)}
                   className="text-left text-foreground hover:text-primary hover:bg-secondary/50 transition-all font-medium py-3 px-4 rounded-lg"
                 >
                   {item.label}
                 </button>
               ))}
               <a
-                href="tel:+380441234567"
+                href={CONTACT_INFO.phoneLink}
                 className="flex items-center text-foreground hover:text-primary hover:bg-secondary/50 transition-all py-3 px-4 rounded-lg"
               >
                 <Phone className="w-5 h-5 mr-2" />
-                <span className="font-semibold">044 123 45 67</span>
+                <span className="font-semibold">{CONTACT_INFO.phone}</span>
               </a>
               <Button
-                onClick={() => scrollToSection("contacts")}
+                onClick={() => handleNavClick("contacts")}
                 className="bg-primary hover:bg-primary/90 w-full mt-2"
               >
                 Записатись на прийом

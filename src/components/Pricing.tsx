@@ -1,17 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 
 const Pricing = () => {
-  const scrollToContacts = () => {
-    const element = document.getElementById("contacts");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const scrollToSection = useScrollToSection();
 
   const services = [
     {
+      id: "consultation",
       title: "Консультація лікаря",
       price: "150",
       features: [
@@ -22,6 +19,7 @@ const Pricing = () => {
       ],
     },
     {
+      id: "cleaning",
       title: "Професійна чистка зубів",
       price: "400-600",
       features: [
@@ -33,6 +31,7 @@ const Pricing = () => {
       popular: true,
     },
     {
+      id: "filling",
       title: "Пломба (світлоопісна)",
       price: "250-400",
       features: [
@@ -43,6 +42,7 @@ const Pricing = () => {
       ],
     },
     {
+      id: "crown",
       title: "Коронка керамічна",
       price: "2500-3500",
       features: [
@@ -53,6 +53,7 @@ const Pricing = () => {
       ],
     },
     {
+      id: "implant",
       title: "Імплантат",
       price: "5000-7000",
       features: [
@@ -63,6 +64,7 @@ const Pricing = () => {
       ],
     },
     {
+      id: "whitening",
       title: "Відбілювання зубів",
       price: "1500-2000",
       features: [
@@ -73,6 +75,7 @@ const Pricing = () => {
       ],
     },
     {
+      id: "braces",
       title: "Брекети (за всю систему)",
       price: "15000-25000",
       features: [
@@ -83,6 +86,7 @@ const Pricing = () => {
       ],
     },
     {
+      id: "aligners",
       title: "Елайнери",
       price: "12000-20000",
       features: [
@@ -107,12 +111,11 @@ const Pricing = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <Card
-              key={index}
-              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 relative group flex flex-col w-full max-w-sm md:max-w-none ${
-                service.popular ? "ring-2 ring-primary" : ""
-              }`}
+              key={service.id}
+              className={`border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 relative group flex flex-col w-full max-w-sm md:max-w-none ${service.popular ? "ring-2 ring-primary" : ""
+                }`}
             >
               {service.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -143,7 +146,7 @@ const Pricing = () => {
               <CardFooter className="p-6 pt-0 mt-auto">
                 <Button
                   className="w-full bg-primary hover:bg-primary/90"
-                  onClick={scrollToContacts}
+                  onClick={() => scrollToSection("contacts")}
                 >
                   Записатись
                 </Button>
@@ -160,7 +163,7 @@ const Pricing = () => {
             variant="outline"
             size="lg"
             className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            onClick={scrollToContacts}
+            onClick={() => scrollToSection("contacts")}
           >
             Отримати консультацію
           </Button>

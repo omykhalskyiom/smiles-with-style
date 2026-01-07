@@ -1,34 +1,40 @@
-import { Stethoscope, Sparkles, HeartPulse, Calendar, Shield, Users, Award, MapPin } from "lucide-react";
+import { Stethoscope, Sparkles, HeartPulse, Shield, Users, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Benefits = () => {
   const benefits = [
     {
+      id: "equipment",
       icon: Sparkles,
       title: "Сучасна матеріально-технічна база",
       description: "Обладнання найбільших світових виробників (KAVO, Planmeca, Zeiss), цифрова радіографія та 3D-томографія",
     },
     {
+      id: "staff",
       icon: Stethoscope,
       title: "Висококваліфікований персонал",
       description: "Лікарі зі спеціалізацією та сертифікатами міжнародного рівня, досвід роботи від 7+ років",
     },
     {
+      id: "comfort",
       icon: HeartPulse,
       title: "Комфортне середовище",
       description: "Затишні кабінети з європейським ремонтом, система кондиціювання повітря, дружелюбний персонал",
     },
     {
+      id: "safety",
       icon: Shield,
       title: "Безпечність та якість",
       description: "Біопаліліфікація 100% інструментів, використання тільки ліцензійних матеріалів, гарантія на послуги",
     },
     {
+      id: "individual",
       icon: Users,
       title: "Індивідуальний підхід",
       description: "Детальна консультація перед кожною процедурою, план лікування з врахуванням побажань пацієнта",
     },
     {
+      id: "location",
       icon: MapPin,
       title: "Зручність та доступність",
       description: "Зручне розташування у центрі міста, паркування біля клініки, запис на прийом онлайн чи по телефону",
@@ -48,11 +54,11 @@ const Benefits = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch">
-          {benefits.map((benefit, index) => {
+          {benefits.map((benefit) => {
             const Icon = benefit.icon;
             return (
               <Card
-                key={index}
+                key={benefit.id}
                 className="border-0 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 bg-card group w-full max-w-sm md:max-w-none"
               >
                 <CardContent className="p-6 lg:p-8">
